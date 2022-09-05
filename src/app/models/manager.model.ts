@@ -1,7 +1,7 @@
 import { ObjectId, model, Schema, Types } from "mongoose";
 import bcrypt from "bcrypt";
 
-interface IManager {
+interface Manager {
   first_name: String;
   last_name: String;
   username: String;
@@ -17,7 +17,7 @@ interface IManager {
   is_active:Boolean
 };
 
-const managerSchema = new Schema<IManager>(
+const managerSchema = new Schema<Manager>(
   {
     first_name: {
       type: String,
