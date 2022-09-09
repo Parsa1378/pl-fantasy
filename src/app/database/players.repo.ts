@@ -1,16 +1,11 @@
 import models = require('../models/path');
+import { Request } from "express";
 
-type Query = {
-    filter:Number,
-    page:Number,
-    limit:Number
-};
-
-export const getPlayers = async(query:Query) => {
+export const getPlayers = async(query:Request["query"]) => {
     const players = await models.playerModel.paginate(
         {
             positionId:
-                query.filter === 0
+                query.filter == "0"
                 ? {$gt:0}
                 : query.filter
                 ? query.filter

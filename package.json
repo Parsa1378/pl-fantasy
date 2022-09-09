@@ -20,10 +20,10 @@
         "typescript": "^4.8.2"
     },
     "scripts": {
-        "build": "npx tsc",
-        "start": "tsc && nodemon dist/app.js",
-        "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "tsc",
+        "prestart": "npm run build",
+        "start": "node dist/app.js",
+        "dev": "nodemon"
     },
     "repository": {
         "type": "git",
