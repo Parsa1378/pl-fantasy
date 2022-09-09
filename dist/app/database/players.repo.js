@@ -23,4 +23,21 @@ const getPlayers = (filter, page, limit) => __awaiter(void 0, void 0, void 0, fu
     });
     return players;
 });
-module.exports = getPlayers;
+const getPlayersByName = (web_name, filter, page, limit) => __awaiter(void 0, void 0, void 0, function* () {
+    const players = yield models.playerModel.paginate({
+        positionId: filter,
+        web_name: new RegExp("^" + web_name + "w*", "i")
+    }, {
+        page: page,
+        limit: limit,
+        populate: [
+            { path: "position", select: ["plural_name_short", "generalId"] },
+            { path: "plTeam", select: "short_name" }
+        ]
+    });
+    return players;
+});
+module.exports = {
+    getPlayers,
+    getPlayersByName
+};

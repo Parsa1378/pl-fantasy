@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-const getPlayers = require("../database/players.repo");
+const {getPlayers,getPlayersByName} = require("../database/players.repo");
 
 interface Players {
     docs:Array<object>,
@@ -18,8 +18,30 @@ const showPlayers = async(req:Request,res:Response) => {
     const limit:string | any = req.query.limit ? req.query.limit : 0;
     
     const players:Players = await getPlayers(filter,page,limit);
-        
-    console.log(players.docs.length);
+            
+    if (players.docs.length===0) {
+        return res.status(404).json({ msg: "no player found" });
+    }
+    
+    return res
+    .status(200)
+    .json({
+        data: players.docs,
+        total: players.total,
+        limit: players.limit,
+        page: players.page,
+        pages: players.pages,
+    });
+};
+
+const searchPlayers = async(req:Request,res:Response) => {
+    const web_name:string = req.body.web_name;
+    const filter:string | object = req.query.filter == "0" ? {$gt:0} 
+    : req.query.filter ? req.query.filter
+    : {$gt:0};    
+    const page:string | any = req.query.page ? req.query.page : 0;
+    const limit:string | any = req.query.limit ? req.query.limit : 0;
+    const players:Players = await getPlayersByName(web_name,filter,page,limit);
     
     if (players.docs.length===0) {
         return res.status(404).json({ msg: "no player found" });
@@ -36,4 +58,6 @@ const showPlayers = async(req:Request,res:Response) => {
     });
 };
 
-module.exports = showPlayers;
+module.exports = {
+    showPlayers,searchPlayers
+};
