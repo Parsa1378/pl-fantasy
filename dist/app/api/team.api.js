@@ -8,22 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-require("dotenv").config();
-const express_1 = __importDefault(require("express"));
-const db = require("../database/db.connection");
-const app = (0, express_1.default)();
-const port = parseInt(process.env.PORT);
-const playerRoute = require('../routes/path');
-app.use(express_1.default.json());
-app.use("/api/v1/players", playerRoute);
-const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield db();
-    app.listen(port, () => {
-        console.log(`Server Running on Port: ${port}`);
-    });
+const addPlayerToTeam = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const elementId = req.body.elementId;
 });
-module.exports = startServer;

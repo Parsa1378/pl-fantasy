@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const models = require("../models/path");
 const getPlayers = (filter, page, limit) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("here");
     const players = yield models.playerModel.paginate({
         positionId: filter
     }, {
@@ -21,6 +22,7 @@ const getPlayers = (filter, page, limit) => __awaiter(void 0, void 0, void 0, fu
             { path: "plTeam", select: "short_name" }
         ]
     });
+    console.log(players);
     return players;
 });
 const getPlayersByName = (web_name, filter, page, limit) => __awaiter(void 0, void 0, void 0, function* () {
@@ -36,6 +38,11 @@ const getPlayersByName = (web_name, filter, page, limit) => __awaiter(void 0, vo
         ]
     });
     return players;
+});
+const getPlayerByGeneralId = (elementId) => __awaiter(void 0, void 0, void 0, function* () {
+    const player = yield models.playerModel.findOne({ generalId: elementId });
+    console.log(typeof (player));
+    return player;
 });
 module.exports = {
     getPlayers,

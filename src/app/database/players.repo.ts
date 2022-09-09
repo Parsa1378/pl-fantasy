@@ -1,8 +1,8 @@
 import models = require('../models/path');
 
 const getPlayers = async(filter:string|object,page:string,limit:string) => {
-    
-    const players = await models.playerModel.paginate(
+        
+    const players:object = await models.playerModel.paginate(
         {
             positionId: filter
         },
@@ -15,11 +15,12 @@ const getPlayers = async(filter:string|object,page:string,limit:string) => {
             ]
         }
     );
+    
     return players;
 };
 
 const getPlayersByName = async(web_name:string, filter:string|object, page:string, limit:string) => {
-    const players = await models.playerModel.paginate(
+    const players:Array<object> = await models.playerModel.paginate(
         {
             positionId: filter,
             web_name: new RegExp("^" + web_name + "w*", "i")
@@ -36,7 +37,15 @@ const getPlayersByName = async(web_name:string, filter:string|object, page:strin
     return players;
 };
 
+const getPlayerByGeneralId = async(elementId:number) => {
+    const player:object|undefined|null = await models.playerModel.findOne({generalId:elementId});
+    console.log(typeof(player));
+    
+    return player;
+};
+
 module.exports = {
     getPlayers,
-    getPlayersByName
+    getPlayersByName,
+    getPlayerByGeneralId
 };
