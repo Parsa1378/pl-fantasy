@@ -18,10 +18,15 @@ const db = require("../database/db.connection");
 const app = (0, express_1.default)();
 const port = parseInt(process.env.PORT);
 const playerRoute = require('../routes/path');
+const createTeam = require('../utils/resources/team.populate');
+const createPlayers = require('../utils/resources/player.populate');
+const updateEventdata = require('../utils/resources/evet.populate');
+const updatePlayerPositionsData = require('../utils/resources/position.populate');
 app.use(express_1.default.json());
 app.use("/api/v1/players", playerRoute);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     yield db();
+    yield createPlayers();
     app.listen(port, () => {
         console.log(`server running on port: ${port}`);
     });

@@ -18,7 +18,6 @@ const showPlayers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const page = req.query.page ? req.query.page : 0;
     const limit = req.query.limit ? req.query.limit : 0;
     const players = yield getPlayers(filter, page, limit);
-    console.log(players.docs.length);
     if (players.docs.length === 0) {
         return res.status(404).json({ msg: "no player found" });
     }
@@ -40,7 +39,6 @@ const searchPlayers = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const page = req.query.page ? req.query.page : 0;
     const limit = req.query.limit ? req.query.limit : 0;
     const players = yield getPlayersByName(web_name, filter, page, limit);
-    console.log(players.docs.length);
     if (players.docs.length === 0) {
         return res.status(404).json({ msg: "no player found" });
     }

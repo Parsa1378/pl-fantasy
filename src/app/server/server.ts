@@ -13,7 +13,7 @@ app.use("/api/v1/players", playerRoute);
 const startServer = async()=>{
     await db();
     app.listen(port, () => {
-        console.log(`server running on port: ${port}`);     
+        console.log(`Server Running on Port: ${port}`);     
     })
 };
 

@@ -1,23 +1,6 @@
 const axios = require('axios');
 const playerModel = require('../../models/player.model');
 
-// const createTeam = async() => {
-//     const response = await axios.get(process.env.FPL_URL);
-    
-//     for(let team of response.data.teams) {
-//         plTeamModel.create(
-//             {
-//                 generalId:team.id,
-//                 name:team.name,
-//                 short_name:team.short_name,
-//                 strength:team.strength,
-//                 points:team.points,
-//             }
-//         );
-//     }
-//     console.log('done');    
-// };
-
 const createPlayers = async() => {
     const response = await axios.get(process.env.FPL_URL);
     for(let player of response.data.elements) {
@@ -50,6 +33,4 @@ const createPlayers = async() => {
 };
 
 
-module.exports = {
-    createPlayers
-};
+module.exports = createPlayers;
