@@ -13,7 +13,7 @@ exports.getPlayers = void 0;
 const models = require("../models/path");
 const getPlayers = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const players = yield models.playerModel.paginate({
-        positionId: query.filter === 0
+        positionId: query.filter == "0"
             ? { $gt: 0 }
             : query.filter
                 ? query.filter

@@ -1,14 +1,11 @@
+export{};
 require("dotenv").config();
-import express, { Express, Request, Response } from 'express';
-const server = require("./app/server");
-const port:Number = parseInt(<string>process.env.PORT);
-const app: Express = express();
+const {createPlayers} = require("./app/utils/resources/player.populate");
+const server = require("./app/server/server");
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server in running');
-});
+const populate = async() => {
+    await createPlayers();
+};
 
+populate();
 server();
-// app.listen(port, () => {
-//   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-// });

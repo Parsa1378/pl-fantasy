@@ -1,7 +1,7 @@
 import models = require('../models/path');
 import { Request } from "express";
 
-export const getPlayers = async(query:Request["query"]) => {
+export const getPlayers = async(query:Request["query"]):Promise<Array<object>> => {
     const players = await models.playerModel.paginate(
         {
             positionId:
