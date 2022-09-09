@@ -1,7 +1,8 @@
 import express from "express";
-const routes = express.Router();
-const api = require("../api/player.api");
+const router = express.Router();
+const showPlayers = require("../api/player.api");
 
-routes.get("/", api.showPlayers);
+// routes.get("/", showPlayers);
+router.route("/").get(showPlayers);
 
-module.exports = routes;
+module.exports = router;

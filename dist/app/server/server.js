@@ -17,6 +17,9 @@ const express_1 = __importDefault(require("express"));
 const db = require("../database/db.connection");
 const app = (0, express_1.default)();
 const port = parseInt(process.env.PORT);
+const playerRoute = require('../routes/path');
+app.use(express_1.default.json());
+app.use("/api/v1/players", playerRoute);
 const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     yield db();
     app.listen(port, () => {

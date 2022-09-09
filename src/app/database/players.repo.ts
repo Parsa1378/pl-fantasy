@@ -1,19 +1,14 @@
 import models = require('../models/path');
-import { Request } from "express";
 
-export const getPlayers = async(query:Request["query"]):Promise<Array<object>> => {
+const getPlayers = async(filter:string|object,page:string,limit:string) => {
+    
     const players = await models.playerModel.paginate(
         {
-            positionId:
-                query.filter == "0"
-                ? {$gt:0}
-                : query.filter
-                ? query.filter
-                : { $gt:0 },
+            positionId: filter
         },
         {
-            page: query.page ? query.page : 0,
-            limit: query.limit ? query.limit : 10,
+            page: page,
+            limit: limit,
             populate: [
                 {path:"position", select: ["plural_name_short", "generalId"] },
                 { path: "plTeam", select: "short_name" }

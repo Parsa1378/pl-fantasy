@@ -1,9 +1,9 @@
-const playerModel = require("./playerModel");
-const positionModel = require("./positionModel");
-const managerModel = require("./managerModel");
-const teamModel = require("./teamModel");
-const eventModel = require("./eventModel");
-const pl_teamModel = require("./pl-teamModel");
+const playerModel = require("./player.model");
+const positionModel = require("./position.model");
+const managerModel = require("./manager.model");
+const teamModel = require("./team.model");
+const eventModel = require("./event.model");
+const pl_teamModel = require("./pl.team.model");
 
 export {
   playerModel,

@@ -1,23 +1,29 @@
 import { Request,Response } from "express";
-import {getPlayers} from "../database/players.repo";
+const getPlayers = require("../database/players.repo");
 
-// type PlayerArray = {
-//     docs:object,
-//     total:Number,
-//     limit:Number,
-//     page:Number,
-//     pages:Number
-// };
+interface Players {
+    docs:Array<object>,
+    total: number,
+    limit: string,
+    page: string,
+    pages: number
+};
 
-
-const showPlayers = (req:Request,res:Response) => {
-    const players:any = getPlayers(req.query);
-    console.log(typeof(players));
+const showPlayers = async(req:Request,res:Response) => {
+        
+    const filter:string | object = req.query.filter == "0" ? {$gt:0} 
+    : req.query.filter ? req.query.filter
+    : {$gt:0};    
+    const page:string | any = req.query.page ? req.query.page : 0;
+    const limit:string | any = req.query.limit ? req.query.limit : 0;
     
-
-    if (Object.keys(players).length === 0) {
+    const players:Players = await getPlayers(filter,page,limit);
+        
+    console.log(players.docs.length);
+    
+    if (players.docs.length===0) {
         return res.status(404).json({ msg: "no player found" });
-      }
+    }
     
     return res
     .status(200)
